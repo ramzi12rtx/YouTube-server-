@@ -30,4 +30,5 @@ async function uploadVideo() {
   console.log('✅ Video uploaded:', res.data.id);
 }
 
-uploadVideo().catch(console.error);
+uploadVideo().
+catch(console.error);const generateVideo = require('./generate');
