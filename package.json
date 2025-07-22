@@ -1,0 +1,13 @@
+{
+  "name": "youtube-auto-upload",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "googleapis": "^105.0.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "text-to-speech-js": "^1.0.7"
+  }
+}
