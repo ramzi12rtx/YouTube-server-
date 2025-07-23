@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { google } = require('googleapis');
+const generateVideo = require('./generate'); // استدعاء المولد قبل أو بعد حسب الحاجة
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
@@ -30,5 +31,4 @@ async function uploadVideo() {
   console.log('✅ Video uploaded:', res.data.id);
 }
 
-uploadVideo().
-catch(console.error);const generateVideo = require('./generate');
+uploadVideo().catch(console.error);
