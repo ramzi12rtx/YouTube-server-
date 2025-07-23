@@ -1,33 +1,30 @@
-name: Upload Daily Video
+name: Generate Video
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * *' # كل يوم الساعة 12 ظهراً UTC
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+    - name: Install system dependencies for canvas
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
-      - name: Install dependencies
-      - name: Install system dependencies for canvas
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
-        run: npm install
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
 
-      - name: Run video generation
-        run: node generate.js
+    - name: Install dependencies
+      run: npm install
 
-      - name: Upload to YouTube
-        env:
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
-        run: node index.js
+    - name: Run script
+      run: node index.js
