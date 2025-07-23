@@ -3,28 +3,28 @@ name: Generate Video
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 12 * * *' # كل يوم الساعة 12 ظهراً UTC
+    - cron: '0 12 * * *' # كل يوم الساعة 12 ظهراً بتوقيت UTC
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Install system dependencies for canvas
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+      - name: Install system dependencies for canvas
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run script
-      run: node index.js
+      - name: Run script
+        run: node index.js
